@@ -80,6 +80,7 @@ for x in tqdm(range(len(links_clean))):
     try:
         print (str(soup.find_all('caption'))[29:].split(' </b>')[0])
         name = str(soup.find_all('caption'))[29:].split(' </b>')[0]
+        names.append(name)
         # print (str(soup).split('Phone </th><td> ')[1].split('</td>')[0])
     except IndexError:
         # pass 
@@ -102,15 +103,16 @@ for x in tqdm(range(len(links_clean))):
 len(names)
 
 # %%
-phones
+len(phones)
 
 # %%
-names_phones
+# names_phones
 
 # %%
 names = np.array(names)
 phones = np.array(phones)
-names_phones = np.hstack((names[:-1].reshape(len(names)-1, 1), phones.reshape(len(phones), 1)))
+# names_phones = np.hstack((names[:-1].reshape(len(names)-1, 1), phones.reshape(len(phones), 1)))
+names_phones = np.hstack((names.reshape(len(names), 1), phones.reshape(len(phones), 1)))
 names_phones = pd.DataFrame(names_phones)
 names_phones.to_excel("names_phones.xlsx", index=False)
 
